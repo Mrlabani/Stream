@@ -1,6 +1,5 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
 import subprocess
-import os
 
 app = Flask(__name__)
 
@@ -10,10 +9,11 @@ def index():
     if request.method == 'POST':
         magnet = request.form.get('magnet')
         if magnet:
-            subprocess.Popen(["webtorrent", magnet, "--out", "static", "--vlc"], stdout=subprocess.PIPE)
-            stream_url = "/static/output.mp4"  # Adjust based on actual stream file
+            subprocess.Popen(["webtorrent", magnet, "--out", "static"], stdout=subprocess.PIPE)
+            stream_url = "/static/output.mp4"  # update as needed
     return render_template('index.html', stream_url=stream_url)
 
 if __name__ == '__main__':
-    app.run(debug=True)
-  
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host='0.0.0.0', port=port)
