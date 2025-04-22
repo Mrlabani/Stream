@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>WebTorrent Streamer</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">WebTorrent Streamer</h1>
+    <form method="POST">
+      <div class="mb-3">
+        <label for="magnet" class="form-label">Paste Magnet Link</label>
+        <input type="text" class="form-control" id="magnet" name="magnet" placeholder="magnet:?xt=urn:btih:...">
+      </div>
+      <button type="submit" class="btn btn-success w-100">Start Streaming</button>
+    </form>
+
+    {% if stream_url %}
+      <div class="mt-4">
+        <h3>Streaming:</h3>
+        <video src="{{ stream_url }}" controls width="100%"></video>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
